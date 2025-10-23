@@ -14,6 +14,5 @@ pydantic-settings==2.11.0
 pydantic_core==2.41.4
 sentence-transformers==2.7.0
 SQLAlchemy==2.0.44
-torch==2.2.0+cpu
--f https://download.pytorch.org/whl/torch_stable.html
+torch==2.5.1    
 uvicorn==0.38.0
