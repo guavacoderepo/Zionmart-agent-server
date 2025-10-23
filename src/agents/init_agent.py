@@ -1,0 +1,47 @@
+from .classifier_agent import order_classifier, query_classifier, rewriter_node
+from .order_agent import cancel_order, create_order, edit_order, retrieve_items
+from .complaint_enquiry_agent import complaint, enquiry
+from src.services.routers_service import on_order_router, on_topic_router
+
+from langgraph.graph import StateGraph, END
+from langgraph.checkpoint.memory import MemorySaver
+from src.schema.agent_schemes import AgentState
+
+graph = StateGraph(AgentState)
+memory = MemorySaver()
+
+# --- Node 3: End node ---
+def end_node(state: AgentState):
+    return state
+
+# --- Add nodes ---
+graph.add_node("rewriter", rewriter_node)
+graph.add_node("classifier", query_classifier)
+graph.add_node("order_classifier", order_classifier)
+
+graph.add_node("enquiry", enquiry)
+graph.add_node("complaint", complaint)
+
+graph.add_node("create_order", create_order)
+graph.add_node("edit_order", edit_order)
+graph.add_node("cancel_order", cancel_order)
+graph.add_node("retrieve_items", retrieve_items)
+
+graph.add_node("end", end_node)
+
+graph.add_conditional_edges("order_classifier", on_order_router)
+graph.add_conditional_edges("classifier", on_topic_router)
+
+graph.add_edge("create_order", "end")
+graph.add_edge("edit_order", "end")
+graph.add_edge("cancel_order", "end")
+graph.add_edge("retrieve_items", "end")
+
+# --- Define graph entry and exit ---
+graph.set_entry_point("rewriter")
+graph.add_edge("rewriter", "classifier")
+# graph.add_edge("order", END)
+graph.add_edge("end", END)
+
+# --- Compile app ---
+agent = graph.compile(checkpointer=memory)
