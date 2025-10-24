@@ -14,7 +14,7 @@ def on_topic_router(state: AgentState):
     elif topic == "enquiry":
         return "enquiry"
     else:
-        return "end"
+        return "off_topic"
     
 def on_order_router(state: AgentState):
     order_type = state.get("order_type")

@@ -1,3 +1,4 @@
+from src.agents.off_topic_agent import off_topic
 from .classifier_agent import order_classifier, query_classifier, rewriter_node
 from .order_agent import cancel_order, create_order, edit_order, retrieve_items
 from .complaint_enquiry_agent import complaint, enquiry
@@ -21,6 +22,7 @@ graph.add_node("order_classifier", order_classifier)
 
 graph.add_node("enquiry", enquiry)
 graph.add_node("complaint", complaint)
+graph.add_node("off_topic", off_topic)
 
 graph.add_node("create_order", create_order)
 graph.add_node("edit_order", edit_order)
@@ -36,6 +38,7 @@ graph.add_edge("create_order", "end")
 graph.add_edge("edit_order", "end")
 graph.add_edge("cancel_order", "end")
 graph.add_edge("retrieve_items", "end")
+graph.add_edge("off_topic", "end")
 
 # --- Define graph entry and exit ---
 graph.set_entry_point("rewriter")
