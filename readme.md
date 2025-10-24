@@ -50,9 +50,10 @@ The architecture is **modular and agentic**, combining multiple specialized agen
 - Handles **conditional logic** for multi-agent workflows.  
 - Aggregates responses from sub-agents and maintains **workflow continuity**.  
 
-### 5. Enquiry Agent
-- Handles **general enquiries** not related to orders or tickets.  
-- Can **retrieve relevant information** and escalate to the supervisor if needed.  
+### 5. Complaint Handling with Specialized Departments
+- Complaints are assigned automatically to **specialized department agents** such as **Billing, Shipping, Product Support**, etc.  
+- Each department agent resolves the issue and reports back to the Supervisor.  
+- Ensures faster response times and accurate handling of complaints.  
 
 ### 6. Retrieval-Augmented Generation (RAG) Integration
 - Agents can **access knowledge bases, FAQs, or external documents** before generating responses.  
@@ -85,6 +86,24 @@ The architecture is **modular and agentic**, combining multiple specialized agen
 
 ---
 
+## ⚙️ Running the Application  
+
+```bash
+# Clone the repository
+git clone <repo-url>
+cd Zionmart-agent-server
+
+# Activate environment
+python -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the FastAPI server
+uvicorn src.main:app --host 0.0.0.0 --port 5000
+
+---
 
 ## 🧪 Use Cases  
 
