@@ -2,6 +2,8 @@
 
 This project is an **agentic AI system** designed to automate **customer support, order management, and user enquiries** using a **multi-agent workflow**. It leverages **LangGraph**, **LangChain**, and **RAG (Retrieval-Augmented Generation)** to provide **intelligent, context-aware, and data-grounded responses**.  
 
+![Agentic AI Workflow](image.png)
+
 ---
 
 ## 🚀 Project Overview  
