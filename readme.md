@@ -90,7 +90,7 @@ The architecture is **modular and agentic**, combining multiple specialized agen
 
 ```bash
 # Clone the repository
-git clone <repo-url>
+git clone https://github.com/guavacoderepo/Zionmart-agent-server.git
 cd Zionmart-agent-server
 
 # Activate environment
@@ -101,8 +101,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Run the FastAPI server
-uvicorn src.main:app --host 0.0.0.0 --port 5000
-
+uvicorn src.api.main:app --port 5000
+```
 ---
 
 ## 🧪 Use Cases  
