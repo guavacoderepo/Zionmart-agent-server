@@ -1,126 +1,116 @@
-# 🧠 AI-Powered Support & Product Retrieval System  
+# 🧠 Agentic AI-Powered Support & Order Management System  
 
-This project is an **AI-integrated support and product management system** built to streamline how users interact with an e-commerce or business support environment. It leverages **LangChain tools**, **SQLAlchemy ORM**, and **modular AI agents** to automate product retrieval, customer support ticketing, and user management tasks.  
+This project is an **agentic AI system** designed to automate **customer support, order management, and user enquiries** using a **multi-agent workflow**. It leverages **LangGraph**, **LangChain**, and **RAG (Retrieval-Augmented Generation)** to provide **intelligent, context-aware, and data-grounded responses**.  
 
 ---
 
 ## 🚀 Project Overview  
 
-The system acts as a **bridge between AI reasoning and real-world database operations**. By integrating LangChain’s `@tool` framework with SQLAlchemy, the project allows AI agents to:  
-- Search for products by name or description.  
-- Create, edit, or delete customer support tickets.  
-- Retrieve user information dynamically from the database.  
+The system is a **graph-based multi-agent AI framework** that acts as a bridge between **natural language reasoning** and **structured database actions**.  
 
-This setup allows **conversational AI systems** (like chatbots or agentic applications) to **directly perform structured database actions**, improving automation, customer satisfaction, and operational efficiency.  
+Key capabilities include:  
+- Autonomous **order handling** (create, edit, cancel, retrieve).  
+- Automated **support ticket management**.  
+- Handling general **user enquiries**.  
+- **Dynamic routing** via a supervisor/router agent.  
+- **RAG-enabled knowledge retrieval** for data-grounded AI responses.  
+
+This setup enables AI agents to **interact with structured databases** safely while providing **human-like, intelligent automation**.
 
 ---
 
 ## 🏗️ System Architecture  
 
-The project is organized into distinct modules that handle different functional areas:  
+The architecture is **modular and agentic**, combining multiple specialized agents into a single, orchestrated workflow. 
 
-### 1. **Product Retrieval Tool**
-Allows AI agents to retrieve product details by name, even when the user provides partial or fuzzy input.  
-- Performs **case-insensitive searches**.  
-- Returns structured product information (ID, name, price, and description).  
-- Handles empty or invalid search queries gracefully.  
+![Agentic AI Workflow](agent_graph_conditional.png)
 
-### 2. **Ticket Management Tools**
-Automates customer support workflows through four main actions:  
-- **Create Ticket:** Records a new customer inquiry, linked to a user and optional department.  
-- **Edit Ticket:** Updates ticket details such as message, subject, department, or status.  
-- **Delete Ticket:** Removes tickets that are resolved or no longer needed.  
-- **Retrieve Ticket:** (Optional future addition) Could allow for detailed query or filtering of support tickets.  
+### 1. Graph-Based Multi-Agent Workflow (LangGraph)
+- The workflow is represented as a **state graph**, where nodes are **agents or actions** and edges are **conditional routes**.  
+- Allows dynamic decision-making based on user input or agent responses.  
+- Makes it easy to **visualize and extend** the AI system.  
 
-Each ticket tool ensures **transactional safety** with rollback mechanisms to maintain database integrity.  
+### 2. Order Handler Agent
+- Handles all **order-related tasks**:  
+  - **Create Order** – Initiates a new purchase.  
+  - **Edit Order** – Updates existing orders (quantity, items, delivery).  
+  - **Cancel Order** – Cancels active or pending orders.  
+  - **Retrieve Order Items** – Lists items in a user’s order.  
+- Ensures **transactional integrity** with the database.  
 
-### 3. **User Management Tools**
-Provides AI-driven access to user information.  
-- Retrieve user by **ID** (UUID-based).  
-- Retrieve user(s) by **name or email**, allowing for flexible lookup during chat-based queries.  
-- Returns lightweight user information (ID, name, email) for safe agentic use.  
+### 3. Ticket Management Agents
+- Automates **customer support ticket workflows**:  
+  - **Create Ticket** – Logs a new inquiry.  
+  - **Edit Ticket** – Updates ticket details or status.  
+  - **Cancel Ticket** – Removes resolved or obsolete tickets.  
+- Uses **SQLAlchemy sessions and rollback mechanisms** for safe database operations.  
+
+### 4. Supervisor / Router Agent
+- Acts as the **central orchestrator** that routes queries to the appropriate sub-agent.  
+- Handles **conditional logic** for multi-agent workflows.  
+- Aggregates responses from sub-agents and maintains **workflow continuity**.  
+
+### 5. Enquiry Agent
+- Handles **general enquiries** not related to orders or tickets.  
+- Can **retrieve relevant information** and escalate to the supervisor if needed.  
+
+### 6. Retrieval-Augmented Generation (RAG) Integration
+- Agents can **access knowledge bases, FAQs, or external documents** before generating responses.  
+- Ensures **contextually accurate and data-grounded answers**.  
+- Enhances the AI system’s **decision-making capabilities**.  
 
 ---
 
 ## 🧩 Technology Stack  
 
 | Category | Technology |
-|-----------|-------------|
+|----------|-----------|
 | **Programming Language** | Python 3.10+ |
-| **ORM & Database Layer** | SQLAlchemy |
-| **AI Integration** | LangChain Core Tools |
-| **Web Framework (Optional)** | FastAPI |
-| **Database** | PostgreSQL / SQLite (configurable) |
-| **Environment Management** | Virtualenv / Conda |
-| **Typing & Linting** | MyPy, Black, Flake8 |
-
----
-
-## 🧠 AI & Agentic Capabilities  
-
-The project is designed to be **agent-compatible**, meaning it can be embedded inside a LangChain agent or similar LLM workflow.  
-
-For example, a chatbot can:  
-- Understand “Find me shoes under £50” → trigger `retrieve_product_by_name()`.  
-- Handle “Open a support ticket for my order delay” → trigger `create_ticket()`.  
-- Process “Update my ticket to closed” → trigger `edit_ticket()`.  
-
-This provides **human-like automation** while keeping actions safe and structured through controlled database access.  
+| **Graph & Agent Framework** | LangGraph, LangChain |
+| **RAG & Knowledge Retrieval** | LangChain RAG tools |
+| **Web Framework** | FastAPI |
+| **ORM / Database** | SQLAlchemy, PostgreSQL |
+| **Environment Management** | Virtualenv  |
 
 ---
 
 ## ⚙️ Key Features  
 
-✅ **AI Tooling Integration:** Each function is wrapped as a LangChain `@tool`, making it discoverable by LLM agents.  
-✅ **Database Safety:** Each transaction includes rollback protection and session management.  
-✅ **Scalability:** Can easily integrate new models or tools (e.g., order tracking, product recommendation).  
-✅ **Human-Readable Returns:** Outputs are returned as dictionaries and lists for easy parsing in chat or API environments.  
-✅ **Extensible Structure:** Supports additional tables or AI tools without major refactoring.  
+- ✅ **Multi-Agent AI:** Specialized agents for order handling, ticket management, and enquiries.  
+- ✅ **Graph-Based Workflow:** Orchestrated via **LangGraph** for conditional routing.  
+- ✅ **RAG Integration:** Knowledge retrieval for data-grounded, context-aware responses.  
+- ✅ **Database Safety:** Transactions with rollback and session management.  
+- ✅ **Extensible:** Easy to add new agents, tools, or nodes.  
+- ✅ **Human-Readable Outputs:** Responses returned as dictionaries or JSON for API or chatbot integration.  
 
 ---
 
-## 📂 Project Structure  
-
-
-
-
-
-
----
 
 ## 🧪 Use Cases  
 
-### 🛍️ **E-commerce Chatbots**
-Integrate with AI assistants to help users find products, check availability, and generate support tickets.  
+### 🛍️ E-commerce Chatbots
+- Help users find orders, track purchases, and generate support tickets.  
 
-### 🧑‍💻 **Support Desks**
-Automate ticket management for helpdesk systems, reducing workload and improving response times.  
+### 🧑‍💻 Customer Support
+- Automate helpdesk ticket creation, editing, and closure.  
+- Reduce workload and improve response times.  
 
-### 🧩 **Agentic Systems**
-Embed into larger AI frameworks to enable data-grounded reasoning — allowing LLMs to interact with structured data directly.  
-
----
-
-## 🔒 Error Handling & Validation  
-
-Each tool uses:  
-- **Try/Except blocks** to catch runtime errors.  
-- **Graceful fallbacks** that return descriptive error messages instead of crashing.  
-- **Database session cleanup** with `finally: session.close()` to prevent memory leaks.  
+### 🧩 Agentic AI Systems
+- Multi-agent orchestration with **supervisor routing**.  
+- Enables AI reasoning over **structured data and RAG knowledge sources**.  
 
 ---
 
 ## 🌐 Future Enhancements  
 
-- ✅ Add **order management tools** (track, update, cancel).  
-- ✅ Introduce **multi-agent collaboration** between support, sales, and analytics agents.  
-- ✅ Include **vector search** for product recommendations using embeddings.  
-- ✅ Add **authentication & access control** for secure API calls.  
+- ✅ Advanced **order analytics and reporting** agents.  
+- ✅ **Multi-agent collaboration** for support, sales, and analytics.  
+- ✅ **Vector search and semantic retrieval** for product recommendations.  
+- ✅ **Authentication and role-based access** for secure API usage.  
 
 ---
 
 ## 🧭 Conclusion  
 
-This project is a foundation for **AI-driven operational systems**, bridging natural language reasoning with real business actions.  
-It can be deployed as a standalone backend or integrated into **LangChain, OpenAI Assistants, or agentic orchestration frameworks** to build intelligent, context-aware automation.  
-
+This project is a **foundation for agentic AI systems**, bridging **LLM reasoning**, **structured database interactions**, and **knowledge-grounded decision-making**.  
+It can serve as a backend for **AI-powered chatbots, customer support platforms, and multi-agent orchestration frameworks**.

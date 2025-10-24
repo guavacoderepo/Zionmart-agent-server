@@ -3,12 +3,12 @@ from typing import Annotated, Any, List, Optional, TypedDict
 from pydantic import BaseModel, Field
 from langgraph.graph import add_messages
 
-class ClassifierModel(BaseModel):
+class SupervisorModel(BaseModel):
     """Query classification result: "order", "complaint", "enquiry" or "off_topic"."""
     status: str = Field(..., description='Category of the user query: "order", "complaint", "enquiry" or "off_topic"')
 
 
-class OrderClassifier(BaseModel):
+class OrderSupervisorModel(BaseModel):
     """Query classification result: "create_order", "edit_order", "cancel_order", or "retrieve_items"."""
     status: str = Field(..., description='Category of the user query: "create_order", "edit_order", "cancel_order", or "retrieve_items"')
 

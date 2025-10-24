@@ -7,7 +7,7 @@ from src.utils.sample_docx import documents
 from src.schema.agent_schemes import AgentState
 from src.services.routers_service import route_handler
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash") 
 
 
 embedding_func = HuggingFaceEmbeddings(
