@@ -1,3 +1,4 @@
+import json
 from src.schema.agent_schemes import AgentState
 from langchain_core.messages import HumanMessage, BaseMessage, AIMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -62,7 +63,12 @@ async def route_handler(state:AgentState, prompt:str):
 
     if not getattr(messages[-1], "content"):
         response = await llm_with_tools.ainvoke(messages)
-        messages.append(AIMessage(content=response.content))
+        if response.content and isinstance(response.content[0], dict):
+            ai_text = response.content[0].get("text", "Sorry, I don't have an answer.")
+        else:
+            ai_text = str(response.content[0]) if response.content else "Sorry, I don't have an answer."
+
+        messages.append(AIMessage(content=ai_text))
     # Update state with the last LLM message
     state["messages"] = state.get("messages", []) + [messages[-1]]
     return state
